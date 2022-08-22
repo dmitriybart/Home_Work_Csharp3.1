@@ -1,4 +1,4 @@
-﻿// Задать массив из 12 элементов, заполненных числами из [0,9]. Найти сумму положительных/отрицательных элементов массива
+﻿// Определить, присутствует ли в заданном массиве, некоторое число
 int [] FillArray(int size, int minimum, int maximum)
 {
     int[] array = new int [size];
@@ -10,7 +10,8 @@ int [] FillArray(int size, int minimum, int maximum)
         index++;
     }
     return array;
-    }
+}
+
 void PrintArray(int[] collection)
 {
     int position = 0;
@@ -21,29 +22,40 @@ void PrintArray(int[] collection)
 }
 Console.WriteLine();
 }
+
+int IndexOf(int[]array, int find)
+{
+int position = -1; 
+for(int i = 0; i < array.Length; i++)
+{
+if(array[i] == find)
+{
+position = i;
+break;
+}
+}
+return position;
+}
 Console.Write("Введите размер массива: ");
-int size = int.Parse(Console.ReadLine()?? "0");
+int size = int.Parse(Console.ReadLine() ?? "0");
+
 Console.Write("Введите минимальное значение: ");
 int minimum = int.Parse(Console.ReadLine()?? "0");
+
 Console.Write("Введите максимальное значение: ");
 int maximum = int.Parse(Console.ReadLine()?? "0");
+
 int [] array = FillArray(size, minimum, maximum);
+
 PrintArray(array);
-int i=0;
-int sum=0;
-int sum2=0;
-while (i < size)
+
+Console.Write("Введите число которое мы должны найти в массиве: ");
+int number = int.Parse(Console.ReadLine() ?? "0");
+int NumberArray = IndexOf(array, number);
+
+if (NumberArray > -1)
 {
-    if (array[i]>=0)
-    {
-        sum2=sum2+array[i];
-        i++;
-    }
-    else 
-    {
-        sum=sum+array[i];
-        i++;
-    }
+    Console.WriteLine($"Число {number} находится в ячейке под номером {NumberArray + 1}, с индексом {NumberArray}");
 }
-Console.WriteLine("Сумма отрицательных чисел равна: " +sum);
-Console.WriteLine("Сумма положительных чисел равна: " +sum2);
+else 
+Console.WriteLine($"Число {number} не находится в заданном массиве !");
